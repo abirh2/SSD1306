@@ -50,11 +50,11 @@ int main(void)
   // set position
   SSD1306_SetPosition (40, 3);
   // draw string
-  SSD1306_DrawString ("MATIASUS");
+  SSD1306_DrawString ("BLISSALARM");
   // set position
   SSD1306_SetPosition (53, 5);
   // draw string
-  SSD1306_DrawString ("2021");
+  SSD1306_DrawString ("2023");
   // update
   SSD1306_UpdateScreen (addr);
 

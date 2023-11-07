@@ -140,25 +140,25 @@
    *
    * @return  char
    */
-  char TWI_MT_Start (void);
+  enum status_code TWI_MT_Start(void);
 
   /**
    * @desc    TWI Send SLAW
    *
-   * @param   void
+   * @param   uint8_t slaw
    *
-   * @return  unsigned char
+   * @return  uenum
    */
-  char TWI_MT_Send_SLAW (char);
+  enum status_code TWI_MT_Send_SLAW(uint8_t slaw);
 
   /**
    * @desc    TWI Send data
    *
-   * @param   char
+   * @param   uint8_t data
    *
-   * @return  char
+   * @return  enum
    */
-  char TWI_MT_Send_Data (char);
+  enum status_code TWI_MT_Send_Data(uint8_t data);
 
   /**
    * @desc    TWI Send SLAR
@@ -167,7 +167,7 @@
    *
    * @return  unsigned char
    */
-  char TWI_MR_Send_SLAR (char);
+  enum status_code TWI_MR_Send_SLAR(uint8_t slar, uint8_t *data, uint16_t length);
 
   /**
    * @desc    TWI stop

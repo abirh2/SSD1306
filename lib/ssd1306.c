@@ -214,29 +214,38 @@ uint8_t SSD1306_Init (uint8_t address)
  */
 uint8_t SSD1306_Send_StartAndSLAW (uint8_t address)
 {
-  // init status
-  uint8_t status = INIT_STATUS;
+  // // init status
+  // uint8_t status = INIT_STATUS;
 
-  // TWI: start
-  // -------------------------------------------------------------------------------------
-  status = TWI_MT_Start ();
-  // request - start TWI
-  if (SSD1306_SUCCESS != status) {
-    // error
-    return status;
-  }
+  // // TWI: start
+  // // -------------------------------------------------------------------------------------
+  // status = TWI_MT_Start ();
+  // // request - start TWI
+  // if (SSD1306_SUCCESS != status) {
+  //   // error
+  //   return status;
+  // }
 
-  // TWI: send SLAW
-  // -------------------------------------------------------------------------------------
-  status = TWI_MT_Send_SLAW (address);
-  // request - send SLAW
-  if (SSD1306_SUCCESS != status) {
-    // error
-    return status;
-  }
+  // // TWI: send SLAW
+  // // -------------------------------------------------------------------------------------
+  // status = TWI_MT_Send_SLAW (address);
+  // // request - send SLAW
+  // if (SSD1306_SUCCESS != status) {
+  //   // error
+  //   return status;
+  // }
 
-  // success
-  return SSD1306_SUCCESS;
+  // // success
+  // return SSD1306_SUCCESS;
+
+  /** UPDATED CODE *********************/
+  if (TWI_MT_Start() == STATUS_OK) {
+        if (TWI_MT_Send_SLAW(address) == STATUS_OK) {
+            return SSD1306_SUCCESS;
+        }
+    }
+    return SSD1306_ERROR;
+
 }
 
 /**
@@ -248,29 +257,37 @@ uint8_t SSD1306_Send_StartAndSLAW (uint8_t address)
  */
 uint8_t SSD1306_Send_Command (uint8_t command)
 {
-  // init status
-  uint8_t status = INIT_STATUS;
+  // // init status
+  // uint8_t status = INIT_STATUS;
 
-  // send control byte
-  // -------------------------------------------------------------------------------------   
-  status = TWI_MT_Send_Data (SSD1306_COMMAND);
-  // request - start TWI
-  if (SSD1306_SUCCESS != status) {
-    // error
-    return status;
-  }
+  // // send control byte
+  // // -------------------------------------------------------------------------------------   
+  // status = TWI_MT_Send_Data (SSD1306_COMMAND);
+  // // request - start TWI
+  // if (SSD1306_SUCCESS != status) {
+  //   // error
+  //   return status;
+  // }
 
-  // send command
-  // -------------------------------------------------------------------------------------   
-  status = TWI_MT_Send_Data (command);
-  // request - start TWI
-  if (SSD1306_SUCCESS != status) {
-    // error
-    return status;
-  }
+  // // send command
+  // // -------------------------------------------------------------------------------------   
+  // status = TWI_MT_Send_Data (command);
+  // // request - start TWI
+  // if (SSD1306_SUCCESS != status) {
+  //   // error
+  //   return status;
+  // }
 
-  // success
-  return SSD1306_SUCCESS;
+  // // success
+  // return SSD1306_SUCCESS;
+
+  /** UPDATED CODE *********************/
+  if (TWI_MT_Send_Data(SSD1306_COMMAND) == STATUS_OK) {
+        if (TWI_MT_Send_Data(command) == STATUS_OK) {
+            return SSD1306_SUCCESS;
+        }
+    }
+  return SSD1306_ERROR;
 }
 
 /**
@@ -357,7 +374,7 @@ uint8_t SSD1306_UpdateScreen (uint8_t address)
 
   // TWI: start & SLAW
   // -------------------------------------------------------------------------------------
-  status = SSD1306_Send_StartAndSLAW (address);
+  status = SSD1306_Send_StartAndSLAW(address);
   // request succesfull
   if (SSD1306_SUCCESS != status) {
     // error
